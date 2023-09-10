@@ -10,13 +10,16 @@ import styles from '../styles/styles.module.css'
 export const productContext = React.createContext({} as IProductContext);
 const { Provider } = productContext;
 
-export const ProductCard = ({children, product}: IProductCardProps) => {
+export const ProductCard = ({children, product, className, style}: IProductCardProps) => {
 
   const {counter, increaseBy} = useProduct();
 
   return (
     <Provider value={{product, counter, increaseBy}}>
-        <div className={ styles.productCard }>
+        <div 
+          className={ `${styles.productCard} ${className ? className : ''}` } 
+          style={style}
+        >
 
             {children}
 

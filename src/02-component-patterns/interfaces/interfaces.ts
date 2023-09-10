@@ -1,8 +1,10 @@
-import { ReactElement } from "react";
+import { CSSProperties, ReactElement } from "react";
 
 export interface IProductCardProps {
     children: ReactElement | ReactElement[];
     product: IProduct;
+    className?: string;
+    style?: CSSProperties;
 }
 
 export interface IProduct {
