@@ -10,18 +10,25 @@ import styles from '../styles/styles.module.css'
 export const productContext = React.createContext({} as IProductContext);
 const { Provider } = productContext;
 
-export const ProductCard = ({children, product, className, style, onChange, value}: IProductCardProps) => {
+export const ProductCard = ({children, product, className, style, onChange, value, initialValues}: IProductCardProps) => {
 
-  const {counter, increaseBy} = useProduct({product, onChange, value});
+  const {counter, isMaxCountReached, maxCount, increaseBy, reset} = useProduct({product, onChange, value, initialValues});
 
   return (
-    <Provider value={{product, counter, increaseBy}}>
+    <Provider value={{product, counter, increaseBy, maxCount}}>
         <div 
           className={ `${styles.productCard} ${className ? className : ''}` } 
           style={style}
         >
 
-            {children}
+            {children({
+              count: counter,
+              isMaxCountReached,
+              maxCount,
+              product,
+              increaseBy,
+              reset
+            })}
 
         </div>
     </Provider>

@@ -1,5 +1,3 @@
-import { useShoppingPageCart } from "../hooks/useShoppingPageCart";
-
 /** Components */
 import { ProductButtons, ProductCard, ProductImage, ProductTitle,  } from "../components"
 
@@ -14,10 +12,9 @@ export interface IProductInCard extends IProduct {
   count: number;
 }
 
-export const ShoppingPage = () => {  
+const product = products[0];
 
-  const { onProductCountChange, shoppingCart } = useShoppingPageCart();
-
+export const ShoppingPage = () => {
   return (
     <>
       <div style={{
@@ -26,75 +23,33 @@ export const ShoppingPage = () => {
       }}>
         <h1>ShoppingPage</h1>
 
-        <div style={{
-          display: 'flex',
-          flexDirection: 'row',
-          flexWrap: 'wrap'
-        }}>
-
-          {
-            products.map((product)=>(
-              <ProductCard 
-                key={product.id} 
-                product={product} 
-                className="bg-dark"
-                onChange={onProductCountChange}
-                value={ shoppingCart[product.id]?.count || 0 }
-              >
-                <ProductImage className="custom-image" />
-                <ProductTitle className="title-white" />
-                <ProductButtons className="custom-buttons" />
-            </ProductCard>
-            ))
-          }
-
-          <div className="shopping-cart" style={{width:'100px'}}>
-
-            {
-              Object.entries(shoppingCart).map(([key, product]) => (
-                <ProductCard
-                  key={key}
-                  product={product} 
-                  className="bg-dark text-white" 
-                  style={{width: '100px'}}
-                  onChange={onProductCountChange}
-                  value={product.count}
-                >
-                  <ProductImage className="custom-image" style={{ boxShadow: '10px 10px 10px rgba(0,0,0,0.2)'}} />
-                  <ProductButtons className="custom-buttons" />
-                </ProductCard>
-              ))
-
-            }
-
-
-          </div> 
-
-          {/* <ProductCard product={product2} className="bg-dark">
-            <ProductCard.Image className="custom-image" />  
-            <ProductCard.Title className="title-white" />
-            <ProductCard.Buttons className="custom-buttons" />
-          </ProductCard> */}
-
-          {/* <ProductCard 
+        <div>
+          <ProductCard 
+            key={product.id} 
             product={product} 
-            style={{
-              backgroundColor: '#70D1F8'
+            className="bg-dark"
+            initialValues={{
+              count: 4,
+              maxCount: 10,
             }}
           >
-            <ProductImage 
-              style={{ boxShadow: '10px 10px 10px rgba(0,0,0,0.2)' }}
-            />
-            <ProductTitle 
-              style={{fontWeight: 'bold'}}
-            />
-            <ProductButtons 
-              style={{
-                display: 'flex',
-                justifyContent: 'end',
-              }}
-            />
-          </ProductCard> */}
+            {
+              ({count,
+                increaseBy,
+                reset}) => (
+                <>
+                  <ProductImage className="custom-image" />
+                  <ProductTitle className="title-white" />
+                  <ProductButtons className="custom-buttons" />
+                  
+                  <button onClick={reset}>Reset</button>
+                  <button onClick={() => increaseBy(2)}>+2</button>
+                  <button onClick={() => increaseBy(-2)}>-2</button>
+                  <span>{count}</span>
+                </>
+              )
+            }
+          </ProductCard>
         </div>
       </div>
 

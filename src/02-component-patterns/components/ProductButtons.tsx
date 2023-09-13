@@ -1,4 +1,4 @@
-import { CSSProperties, useContext } from "react";
+import { CSSProperties, useContext, useMemo } from "react";
 import { productContext } from "./ProductCard";
 
 /** Styles */
@@ -6,7 +6,9 @@ import styles from '../styles/styles.module.css'
 
 export const ProductButtons = ({className, style}: {className?: string, style?: CSSProperties}) => {
 
-    const {counter, increaseBy} = useContext(productContext);
+    const {counter, increaseBy, maxCount} = useContext(productContext);
+    
+    const isDisabled = useMemo(() => !!maxCount && counter >= maxCount, [counter, maxCount])
 
     return(
         <div 
@@ -22,7 +24,8 @@ export const ProductButtons = ({className, style}: {className?: string, style?: 
             <div className={styles.countLabel}>{counter}</div>
 
             <button 
-                className={styles.buttonAdd} 
+                className={`${styles.buttonAdd} ${isDisabled ? styles.disabled : ''}`}
+                disabled={isDisabled} 
                 onClick={() => increaseBy(1)}>
                 +
             </button>
