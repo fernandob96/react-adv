@@ -11,6 +11,8 @@ import { FormikBasicPage } from '../03-forms/pages/FormikBasicPage';
 import { FormikYupPage } from '../03-forms/pages/FormikYupPage';
 import { FormikComponents } from '../03-forms/pages/FormikComponents';
 import { FormikAbstraction } from '../03-forms/pages/FormikAbstraction';
+import { RegisterFormikPage } from '../03-forms/pages/RegisterFormikPage';
+import { DynamicForm } from '../03-forms/pages/DynamicForm';
 
 export const Navigation = () => {
   return (
@@ -20,19 +22,25 @@ export const Navigation = () => {
             <img src={ logo } alt="React Logo" />
           <ul>
             <li>
-              <NavLink to="/register" activeClassName="nav-active" exact>Register page</NavLink>
+              <NavLink to="/register" activeClassName="nav-active" exact>0. Register page</NavLink>
             </li>
             <li>
-              <NavLink to="/formik-basic" activeClassName="nav-active" exact>Formik Basic</NavLink>
+              <NavLink to="/formik-basic" activeClassName="nav-active" exact>1. Formik Basic</NavLink>
             </li>
             <li>
-              <NavLink to="/formik-yup" activeClassName="nav-active" exact>Formik Yup</NavLink>
+              <NavLink to="/formik-yup" activeClassName="nav-active" exact>2. Formik Yup</NavLink>
             </li>
             <li>
-              <NavLink to="/formik-components" activeClassName="nav-active" exact>Formik Components</NavLink>
+              <NavLink to="/formik-components" activeClassName="nav-active" exact>3. Formik Components</NavLink>
             </li>
             <li>
-              <NavLink to="/formik-abstraction" activeClassName="nav-active" exact>Formik Abstraction</NavLink>
+              <NavLink to="/formik-abstraction" activeClassName="nav-active" exact>4. (ideal) Formik Abstraction</NavLink>
+            </li>
+            <li>
+              <NavLink to="/formik-register" activeClassName="nav-active" exact>5. Register Formik</NavLink>
+            </li>
+            <li>
+              <NavLink to="/dynamic-form" activeClassName="nav-active" exact>6. Dynamic Form</NavLink>
             </li>
           </ul>
         </nav>
@@ -45,6 +53,8 @@ export const Navigation = () => {
           <Route path="/formik-yup" component={FormikYupPage} />
           <Route path="/formik-components" component={FormikComponents} />
           <Route path="/formik-abstraction" component={FormikAbstraction} />
+          <Route path="/formik-register" component={RegisterFormikPage} />
+          <Route path="/dynamic-form" component={DynamicForm} />
         </Switch>
       </div>
     </Router>
